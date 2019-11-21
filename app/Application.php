@@ -8,7 +8,7 @@ class Application extends Model
 {
 
 
-  public $fillable = ['faculty','student_number', 'unit_name', 'unit_code', 'type_of_application','letter_of_reason'];
+  public $fillable = ['student_number','faculty', 'unit_name', 'unit_code', 'type_of_application','letter_of_reason'];
 
 
 }

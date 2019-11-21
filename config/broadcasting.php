@@ -28,6 +28,11 @@ return [
     |
     */
 
+    'options' => [
+  'cluster' => 'mt1',
+  'useTLS' => true
+],
+
     'connections' => [
 
         'pusher' => [
@@ -55,5 +60,10 @@ return [
         ],
 
     ],
+
+    'options' => [
+  'cluster' => 'mt1',
+  'useTLS' => true
+],
 
 ];

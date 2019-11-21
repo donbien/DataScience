@@ -5,7 +5,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <form method="post" action="{{ route('timetable.store') }}" autocomplete="off" class="form-horizontal">
+          <form method="post" action="{{ route('extract') }}" autocomplete="off" class="form-horizontal" enctype="multipart/form-data" >
             @csrf
             @method('post')
 
@@ -62,7 +62,7 @@
                   </div>
                 </div>
      
-                              <div class="row">
+                             <!--  <div class="row">
                   <label class="col-sm-2 col-form-label" for="input-password">{{ __(' Unit Name') }}</label>
                   <div class="col-sm-7">
                     <div class="form-group{{ $errors->has('password') ? ' has-danger' : '' }}">
@@ -72,10 +72,10 @@
                       @endif
                     </div>
                   </div>
-                </div>
+                </div> -->
 
 
-                                <div class="row">
+                              <!--   <div class="row">
                   <label class="col-sm-2 col-form-label" for="input-password">{{ __(' Unit Code') }}</label>
                   <div class="col-sm-7">
                     <div class="form-group{{ $errors->has('password') ? ' has-danger' : '' }}">
@@ -85,9 +85,9 @@
                       @endif
                     </div>
                   </div>
-                </div>
+                </div> -->
 
-                                <div class="row">
+                            <!--     <div class="row">
                   <label class="col-sm-2 col-form-label" for="input-password">{{ __(' Lecturer') }}</label>
                   <div class="col-sm-7">
                     <div class="form-group{{ $errors->has('password') ? ' has-danger' : '' }}">
@@ -97,8 +97,8 @@
                       @endif
                     </div>
                   </div>
-                </div>
-                                <div class="row">
+                </div> -->
+                              <!--   <div class="row">
                   <label class="col-sm-2 col-form-label" for="input-password">{{ __(' Day of the week') }}</label>
                   <div class="col-sm-7">
                     <div class="form-group{{ $errors->has('password') ? ' has-danger' : '' }}">
@@ -108,8 +108,8 @@
                       @endif
                     </div>
                   </div>
-                </div>
-                                <div class="row">
+                </div> -->
+                             <!--    <div class="row">
                   <label class="col-sm-2 col-form-label" for="input-password">{{ __(' Time Slot') }}</label>
                   <div class="col-sm-7">
                     <div class="form-group{{ $errors->has('password') ? ' has-danger' : '' }}">
@@ -118,6 +118,15 @@
                         <span id="name-error" class="error text-danger" for="input-name">{{ $errors->first('password') }}</span>
                       @endif
                     </div>
+                  </div>
+                </div> -->
+
+                                      <div class="row">
+                  <label class="col-sm-2 col-form-label" for="input-password-confirmation">{{ __('Timetable') }}</label>
+                  <div class="col-sm-7">
+<!--                     <div class="form-group"> -->
+                       <input type="file" name="file" id='file' class="form-control">
+                    <!-- </div> -->
                   </div>
                 </div>
                          </div>

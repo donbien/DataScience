@@ -15,8 +15,8 @@
                 <i class="material-icons">content_copy</i>
               </div>
               <p class="card-category">Applications</p>
-              <h3 class="card-title">49
-                <small>GB</small>
+              <h3 class="card-title">{{    $application_stats }}
+                <small></small>
               </h3>
             </div>
             <div class="card-footer">

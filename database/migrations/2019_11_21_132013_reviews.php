@@ -1,10 +1,10 @@
 <?php
- 
+
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-  
-class CreateProductsTable extends Migration
+
+class Reviews extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,18 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('reviews', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->text('detail');
+            $table->integer('application_id');
+            $table->string('staff_id');
+            $table->string('comment');
             $table->timestamps();
+
+        $table->foreign('staff_id')->references('id')->on('users');
+        $table->foreign('application_id')->references('id')->on('applications');
         });
     }
-  
+
     /**
      * Reverse the migrations.
      *
@@ -28,6 +32,6 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        //
     }
 }

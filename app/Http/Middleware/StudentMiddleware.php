@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-
+use App\Http\Requests\Request;
 class StudentMiddleware
 {
     /**
@@ -14,13 +14,12 @@ class StudentMiddleware
      * @return mixed
      */
    public function handle($request, Closure $next)
-{
-if ($request->user() && $request->user()->role_id != 2)
-{
-return new Response(view('unauthorized')->with('role_id', 2));
-}
-return $next($request);
-}
-
+    {
+        if ($request->user() && $request->user()->role_id != 2)
+        {
+           return view('unauthorized');
+        }
+        return $next($request);
+    }
 
 }

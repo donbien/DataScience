@@ -61,7 +61,27 @@
                     </div>
                   </div>
                 </div>
+            
+
+
+                <div class="row">
+                  <label class="col-sm-2 col-form-label" for="input-password-confirmation">{{ __('User Role') }}</label>
+                  <div class="col-sm-7">
+                    <div class="form-group">
+                 <select name = "role_id" id='role_id'class="form-control" >
+                        <option value="2">Course Admin</option>
+                        <option value="3">Faculty Manager</option>
+                        <option value="4">Dean</option>
+                        <option value="5">Student</option>
+                        <option value="6">Lecturer</option>
+
+                      </select>
+                    </div>
+                  </div>
+                </div>
               </div>
+                </div>
+                             
               <div class="card-footer ml-auto mr-auto">
                 <button type="submit" class="btn btn-primary">{{ __('Add User') }}</button>
               </div>

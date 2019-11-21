@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+  use App\Application;
 class HomeController extends Controller
 {
     /**
@@ -21,6 +21,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+
+
+ $application_stats = Application::count();
+        
+ return view('dashboard', ['application_stats' => $application_stats]);
     }
 }

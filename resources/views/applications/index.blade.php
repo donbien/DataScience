@@ -49,9 +49,13 @@
                        <th>
                         {{ __('Date Posted') }}
                       </th>
-                <!--       <th class="text-right">
+                      <th>
+                        {{ __('Letter of Reason') }}
+                      </th>
+
+                      <th class="text-right">
                         {{ __('Actions') }}
-                      </th> -->
+                      </th>
                     </thead>
                     <tbody>
                       @foreach($applications as $application)
@@ -70,6 +74,30 @@
                           </td>
                           <td>
                             {{ $application->created_at->format('Y-m-d') }}
+                          </td>
+
+                          <td>
+     <a href="{{ route('download', $application->student_number.'.docx') }}" class="btn btn-sm btn-primary">{{ __('View') }}</a>
+                          </td>
+
+                                                    <td class="td-actions text-right">
+                            @if ($application->id != auth()->id())
+                              <form action="{{ route('user.destroy', $application) }}" method="post">
+                                  @csrf
+                                  @method('delete')
+                              
+                                 <a class="btn btn-primary" href="{{ route('application.edit',$application->id) }}">Edit</a>
+                                  <button type="button" class="btn btn-danger btn-link" data-original-title="" title="" onclick="confirm('{{ __("Are you sure you want to delete this user?") }}') ? this.parentElement.submit() : ''">
+                                      <i class="material-icons">close</i>
+                                      <div class="ripple-container"></div>
+                                  </button>
+                              </form>
+                            @else
+                              <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('application.edit',$application->id ) }}" data-original-title="" title="">
+                                <i class="material-icons">edit</i>
+                                <div class="ripple-container"></div>
+                              </a>
+                            @endif
                           </td>
                         </tr>
                       @endforeach
