@@ -11,25 +11,32 @@
 |
 */
 
- Route::get('/failed', 'StudentResultsController@FailedUnits')->name('FailedUnits');
- Route::post('/extract', 'TimetableController@extract')->name('extract');
- Route::post('/extractexam', 'ExamController@extract')->name('extractexam');
-   Route::get('dean', 'ApplicationController@Dean')->name('dean');
+Route::get('/details/{unit_code}', 'TimetableController@details')->name('details');
+Route::get('bar-chart', 'ChartController@index');
+Route::get('rep', 'ChartController@repeat');
+Route::get('/re', 'HomeController@Ret')->name('Ret');
+Route::get('/retake', 'StudentResultsController@Retakes')->name('Retakes');
+Route::get('/repeats', 'StudentResultsController@Repeat')->name('Repeat');
+Route::get('/special', 'StudentResultsController@Specials')->name('Specials');
+Route::get('/failed', 'StudentResultsController@FailedUnits')->name('FailedUnits');
+Route::post('/extract', 'TimetableController@extract')->name('extract');
+Route::post('/extractexam', 'ExamController@extract')->name('extractexam');
+Route::get('dean', 'ApplicationController@Dean')->name('dean');
 
-    Route::get('count/application', 'ApplicationController@countApplication')->name('countApplication');
+Route::get('count/application', 'ApplicationController@countApplication')->name('countApplication');
 
-   Route::get('student', 'ApplicationController@studentapplication');
-   Route::get('files/{file}', 'ApplicationController@download')->name('download');
+Route::get('student', 'ApplicationController@studentapplication');
+Route::get('files/{file}', 'ApplicationController@download')->name('download');
 
- Route::group(['middleware' => 'App\Http\Middleware\StudentMiddleware'], function()
-    {
-        Route::match(['get', 'post'], '/memberOnlyPage/', 'HomeController@member');
-        
-    });
+Route::group(['middleware' => 'App\Http\Middleware\StudentMiddleware'], function()
+{
+	Route::match(['get', 'post'], '/memberOnlyPage/', 'HomeController@member');
+
+});
 
 
 Route::get('/', function () {
-    return view('welcome');
+	return view('welcome');
 });
 Auth::routes();
 
@@ -43,7 +50,10 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 
-	Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'auth'], function () {
+
+	Route::get('/repeat', 'HomeController@repeat')->name('repeat');
+	Route::get('/retakes', 'HomeController@retakes')->name('retakes');
 	Route::resource('user', 'UserController', ['except' => ['show']]);
 	Route::resource('application', 'ApplicationController', ['except' => ['show']]);
 	Route::resource('timetable', 'TimetableController', ['except' => ['show']]);

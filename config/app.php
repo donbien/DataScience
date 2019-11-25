@@ -163,6 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         NotificationChannels\PusherPushNotifications\PusherPushNotificationsServiceProvider::class,
 
+
         /*
          * Package Service Providers...
          */
@@ -176,7 +177,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
-
+      Khill\Lavacharts\Laravel\LavachartsServiceProvider::class,
+      ConsoleTVs\Charts\ChartsServiceProvider::class
 
     ],
 
@@ -230,6 +232,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'FastExcel' => Rap2hpoutre\FastExcel\Facades\FastExcel::class,
+        'Lava' =>Khill\Lavacharts\Laravel\LavachartsFacade::class,
+        'Charts' => ConsoleTVs\Charts\Facades\Charts::class
 
     ],
 

@@ -42,22 +42,28 @@ class StudentResultsController extends Controller
         $failed = StudentResults::where('marks', '<', 40)->get();
         return response()->json($failed);
     }
-    public function Repeats()
-    {
-        $this->updateColumns();
-        $repeat = StudentResults::join('units','student_units.unit_code','=', 'units.unit_code')->select('student_units.student_number','units.unit_name','student_units.unit_code')->where('student_units.class', '=', 'repeat')->get();
-        return response()->json($repeat);
-    }
+
+
     public function Retakes()
     {
-        $this->updateColumns();
-        $retake = StudentResults::join('units','student_units.unit_code','=', 'units.unit_code')->select('student_units.student_number','units.unit_name','student_units.unit_code')->where('student_units.class', '=', 'retake')->get();
-        return response()->json($retake);
+       $retake = StudentResults::where('marks', '<=', 35)->get();
+        return response()->json(   $retake);
     }
+
+
+    public function Repeat()
+    {
+            $repeats = StudentResults::where(function ($q) {
+            $q->where('marks', '<=', 39);
+            $q->where('marks', '>=', 36);
+            })->get();
+            return response()->json($repeats);
+    }
+
+
     public function Specials()
     {
-        $this->updateColumns();
-        $special = StudentResults::join('units','student_units.unit_code','=', 'units.unit_code')->select('student_units.student_number','units.unit_name','student_units.unit_code')->where('student_units.status', '=', 'special')->get();
+    $special=StudentResults::where('marks', '=', NULL)->get();
         return response()->json($special);
     }
 }

@@ -20,6 +20,9 @@ class CreateStudentsTable extends Migration
             $table->string('faculty');
             $table->string('password');
             $table->timestamps();
+
+
+            students
         });
     }
 

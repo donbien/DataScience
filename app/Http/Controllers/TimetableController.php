@@ -63,12 +63,26 @@ class TimetableController extends Controller
 
 
 
-    $special = StudentResults::join('timetables','student_results.unit_code','=', 'timetables.unit_code')->where('student_results.marks', '<', 40)->first();
+    $special = StudentResults::with('student')->join('timetables','student_results.unit_code','=', 'timetables.unit_code')->where('student_results.marks', '<', 40)->get();
 
+      return response()->json( $special );
 
-
-     return response()->json(    $special);
  }
+
+
+public function details($unit_code){
+
+
+   $details = StudentResults::with('student')->where('student_results.unit_code','=' ,$unit_code)->join('timetables','student_results.unit_code','=', 'timetables.unit_code')->where('student_results.marks', '<', 40)->get();
+   $details=$details->unique('day_of_the_week');
+   $details=$details->groupBy('unit_code');
+
+      return response()->json( $details );
+
+
+
+}
+
  public function import(Request $request){
         //validate the xls file
     $this->validate($request, array(
@@ -161,16 +175,16 @@ public function index()
         $result=StudentResults::with('student')->where('unit_code', 'LIKE', "%{$request->input('unit_code')}%")->where(function($query) {
             $query->where('marks', '<=', '40');
         })->get();
-        foreach($result as $studentresult)
-        {
-          $data=$studentresult->student['email_address'];
-          $user = User::where('email', $studentresult->student['email_address'])->first();
-//      $user = new User();
-// $user->email = 'gmuchiri@strathmore.edu';   // This is the email you want to send to.
-          $user->notify(new SignupActivate($save));
-// 
+//         foreach($result as $studentresult)
+//         {
+//           $data=$studentresult->student['email_address'];
+//           $user = User::where('email', $studentresult->student['email_address'])->first();
+// //      $user = new User();
+// // $user->email = 'gmuchiri@strathmore.edu';   // This is the email you want to send to.
+//           $user->notify(new SignupActivate($save));
+// // 
 
-      }
+//       }
       return response()->json($save);
   }
 

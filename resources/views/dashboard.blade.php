@@ -1,7 +1,4 @@
 
-
-
-
 @extends('layouts.app', ['activePage' => 'dashboard', 'titlePage' => __('Dashboard')])
 
 @section('content')
@@ -33,7 +30,7 @@
                 <i class="material-icons">store</i>
               </div>
               <p class="card-category">Special Exams</p>
-              <h3 class="card-title">23</h3>
+              <h3 class="card-title">{{ $special}}</h3>
             </div>
             <div class="card-footer">
               <div class="stats">
@@ -49,7 +46,7 @@
                 <i class="material-icons">info_outline</i>
               </div>
               <p class="card-category">Retakes</p>
-              <h3 class="card-title">75</h3>
+              <h3 class="card-title">{{$retakes}}</h3>
             </div>
             <div class="card-footer">
               <div class="stats">
@@ -64,8 +61,8 @@
               <div class="card-icon">
                 <i class="fa fa-bars"></i>
               </div>
-              <p class="card-category">Faculty</p>
-              <h3 class="card-title">15</h3>
+              <p class="card-category">Repeat</p>
+              <h3 class="card-title">{{$repeat}}</h3>
             </div>
             <div class="card-footer">
               <div class="stats">
@@ -186,30 +183,14 @@
                   <th>Unit</th>
                 </thead>
                 <tbody>
+                        @foreach($re as $ret)
                   <tr>
-                    <td>07852</td>
-                    <td>Dakota Kolio</td>
-                    <td>FIT</td>
-                    <td>Cost Accounting</td>
+                    <td>{{$ret->student_number}}</td>
+                    <td>{{$ret->unit_code}}</td>
+                    <td></td>
+                    <td></td>
                   </tr>
-                  <tr>
-                    <td>2346</td>
-                    <td>Minerva Hooper</td>
-                    <td>SIMS</td>
-                    <td>Financial Accounting</td>
-                  </tr>
-                  <tr>
-                    <td>3345</td>
-                    <td>Sage Rodriguez</td>
-                    <td>BCOM</td>
-                    <td>Business Finance</td>
-                  </tr>
-                  <tr>
-                    <td>4234</td>
-                    <td>Philip Chaney</td>
-                    <td>Law</td>
-                    <td>Ethics</td>
-                  </tr>
+ @endforeach
                 </tbody>
               </table>
             </div>

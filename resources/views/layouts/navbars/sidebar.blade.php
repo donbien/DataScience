@@ -60,6 +60,14 @@
         </a>
       </li>
 
+            <li class="nav-item{{ $activePage == 'application' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('application.index') }}">
+          <i class="material-icons">bubble_chart</i>
+          <p>{{ __('Reports') }}</p>
+        </a>
+      </li>
+
+
     </ul>
   </div>
 </div>
