@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
   use App\Application;
   use App\StudentResults;
+  use DB;
 class HomeController extends Controller
 {
     /**
@@ -36,15 +37,19 @@ class HomeController extends Controller
 
  $re = StudentResults::where('marks', '<=', 35)->get();
  $spec=StudentResults::where('marks', '=', NULL)->get();
-        
- return view('dashboard', ['application_stats' => $application_stats, 'repeat'=>$repeat,'retakes'=>$retakes,'special'=>$special,'re'=>$re]);
+    $reports = StudentResults::where('marks', '<', 40)->select('unit_code',
+            DB::raw('count(id) as Total')
+     
+  )->groupBy('unit_code')->orderBy('unit_code', 'ASC')->get();
+
+ return view('dashboard', ['application_stats' => $application_stats, 'repeat'=>$repeat,'retakes'=>$retakes,'special'=>$special,'re'=>$re,'reports'=>$reports]);
     }
 
-  public function Ret()
-    {
-       $re = StudentResults::where('marks', '<=', 35)->get();
-   return view('dashboard', ['re' => $re]);
-    }
+  // public function Ret()
+  //   {
+  //      $re = StudentResults::where('marks', '<=', 35)->get();
+  //  return view('dashboard', ['re' => $re]);
+  //   }
 
     
 

@@ -13,4 +13,7 @@ public $fillable = ['student_number', 'unit_name', 'unit_code', 'status','class'
     {
         return $this->belongsTo('App\Students', 'student_number', 'student_number');
     }
+
+
+    
 }

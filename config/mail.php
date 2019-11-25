@@ -57,7 +57,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'info@agilishisa.co.ke'),
-        'name' => env('MAIL_FROM_NAME', 'Claudines App'),
+        'name' => env('MAIL_FROM_NAME', 'Exams Pap'),
     ],
 
     /*

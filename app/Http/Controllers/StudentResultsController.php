@@ -41,6 +41,8 @@ class StudentResultsController extends Controller
         // $this->updateColumns();
         $failed = StudentResults::where('marks', '<', 40)->get();
         return response()->json($failed);
+
+
     }
 
 
@@ -60,10 +62,23 @@ class StudentResultsController extends Controller
             return response()->json($repeats);
     }
 
+   public function Reports()
+    {
+   $reports = StudentResults::where('marks', '<', 40)->select('unit_code',
+            DB::raw('count(id) as Total')
+     
+  )->groupBy('unit_code')->orderBy('unit_code', 'ASC')->get();
+
+      return response()->json($reports);
+    }
 
     public function Specials()
     {
     $special=StudentResults::where('marks', '=', NULL)->get();
         return response()->json($special);
     }
+
+
+
+
 }

@@ -18,6 +18,7 @@ Route::get('/re', 'HomeController@Ret')->name('Ret');
 Route::get('/retake', 'StudentResultsController@Retakes')->name('Retakes');
 Route::get('/repeats', 'StudentResultsController@Repeat')->name('Repeat');
 Route::get('/special', 'StudentResultsController@Specials')->name('Specials');
+Route::get('/reports', 'StudentResultsController@Reports')->name('Reports');
 Route::get('/failed', 'StudentResultsController@FailedUnits')->name('FailedUnits');
 Route::post('/extract', 'TimetableController@extract')->name('extract');
 Route::post('/extractexam', 'ExamController@extract')->name('extractexam');

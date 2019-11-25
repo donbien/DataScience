@@ -7,19 +7,21 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class SignupActivate extends Notification
+class PendingUnit extends Notification
 {
     use Queueable;
 
     /**
      * Create a new notification instance.
      *
+
      * @return void
      */
-    public function __construct($save)
+    public function __construct($details)
     {
     
-  $this->studentdetails = $save;
+  $this->studentdetails = $details;
+
 
     }
 
@@ -44,7 +46,7 @@ class SignupActivate extends Notification
     {
         $url = url('/');
         return (new MailMessage)
-            ->line($this->studentdetails->unit_name.' '.'will be offered from'.' '.$this->studentdetails->session_start. '-'.$this->studentdetails->session_end)
+       
               ->line('Kindly make the application before the two weeks deadline expires ')
             ->action('Make Application', url($url))
             ->line('Thank you!');

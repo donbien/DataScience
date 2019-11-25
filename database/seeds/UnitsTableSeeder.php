@@ -1,19 +1,17 @@
+  
 <?php
-
 use Illuminate\Database\Seeder;
-
-class DatabaseSeeder extends Seeder
+use Illuminate\Support\Facades\DB;
+class UnitsTableSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
-      
-
-         DB::table('units')->insert([
+        DB::table('units')->insert([
             'faculty' => 'FIT',
             'course' =>'ICS',
             'unit_name' => 'Special Topics (Embedded Systems Design)',
@@ -44,5 +42,4 @@ class DatabaseSeeder extends Seeder
             'unit_code' => 'ICS 4102',
         ]);
     }
-    
 }

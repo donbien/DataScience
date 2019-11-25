@@ -127,42 +127,23 @@
      <div class="col-lg-6 col-md-12">
           <div class="card">
             <div class="card-header card-header-primary">
-              <h4 class="card-title">Retakes</h4>
+              <h4 class="card-title">Pending Units</h4>
               <p class="card-category"></p>
             </div>
             <div class="card-body table-responsive">
               <table class="table table-hover">
                 <thead class="text-warning">
-                  <th>Student Id</th>
-                  <th>Name</th>
-                  <th>Faculty</th>
-                  <th>Unit</th>
+                  <th>Unit Code</th>
+                  <th>Total</th>
                 </thead>
                 <tbody>
+              @foreach($reports as $report)
                 <tr>
-                    <td>07852</td>
-                    <td>Dakota Kolio</td>
-                    <td>FIT</td>
-                    <td>Cost Accounting</td>
+                    <td>{{$report->unit_code}}</td>
+                    <td>{{$report->Total}}</td>
+
                   </tr>
-                  <tr>
-                    <td>2346</td>
-                    <td>Minerva Hooper</td>
-                    <td>SIMS</td>
-                    <td>Financial Accounting</td>
-                  </tr>
-                  <tr>
-                    <td>3345</td>
-                    <td>Sage Rodriguez</td>
-                    <td>BCOM</td>
-                    <td>Business Finance</td>
-                  </tr>
-                  <tr>
-                    <td>4234</td>
-                    <td>Philip Chaney</td>
-                    <td>Law</td>
-                    <td>Ethics</td>
-                  </tr>
+                    @endforeach
                 </tbody>
               </table>
             </div>
@@ -183,14 +164,14 @@
                   <th>Unit</th>
                 </thead>
                 <tbody>
-                        @foreach($re as $ret)
+                  @foreach($re as $ret)
                   <tr>
                     <td>{{$ret->student_number}}</td>
                     <td>{{$ret->unit_code}}</td>
                     <td></td>
                     <td></td>
                   </tr>
- @endforeach
+                @endforeach
                 </tbody>
               </table>
             </div>

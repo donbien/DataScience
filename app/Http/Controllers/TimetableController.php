@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\StudentResults;
 use App\Students;
 use App\User;
-use App\Notifications\SignupActivate;
+use App\Notifications\PendingUnit;
 use Auth;
 use Session;
 use Excel;
@@ -64,8 +64,24 @@ class TimetableController extends Controller
 
 
     $special = StudentResults::with('student')->join('timetables','student_results.unit_code','=', 'timetables.unit_code')->where('student_results.marks', '<', 40)->get();
+     $special=  $special->unique('day_of_the_week');
+     $special=  $special->groupBy('unit_code');
 
-      return response()->json( $special );
+
+        foreach($special as $studentresult)
+        {
+              
+          $data=$studentresult[0]->student['email_address'];
+
+          $user = User::where('email', $data)->first();
+//      $user = new User();
+// $user->email = 'gmuchiri@strathmore.edu';   // This is the email you want to send to.
+          $user->notify(new PendingUnit($special));
+// 
+
+      }
+      return response()->json($studentresult[0]);
+
 
  }
 
@@ -76,6 +92,20 @@ public function details($unit_code){
    $details = StudentResults::with('student')->where('student_results.unit_code','=' ,$unit_code)->join('timetables','student_results.unit_code','=', 'timetables.unit_code')->where('student_results.marks', '<', 40)->get();
    $details=$details->unique('day_of_the_week');
    $details=$details->groupBy('unit_code');
+
+
+           foreach( $details as $studentresult)
+        {
+              
+          $data=$studentresult[0]->student['email_address'];
+
+          $user = User::where('email', $data)->first();
+//      $user = new User();
+// $user->email = 'gmuchiri@strathmore.edu';   // This is the email you want to send to.
+          $user->notify(new PendingUnit($details));
+// 
+
+      }
 
       return response()->json( $details );
 
@@ -181,7 +211,7 @@ public function index()
 //           $user = User::where('email', $studentresult->student['email_address'])->first();
 // //      $user = new User();
 // // $user->email = 'gmuchiri@strathmore.edu';   // This is the email you want to send to.
-//           $user->notify(new SignupActivate($save));
+//           $user->notify(new PendingUnit($save));
 // // 
 
 //       }
