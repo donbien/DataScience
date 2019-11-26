@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use App\User;
+use Auth;
 class StudentResultsController extends Controller
 {
  //Updating the value of status and class in table student_unit to determine what is to be displayed to the student.
@@ -39,9 +41,20 @@ class StudentResultsController extends Controller
     public function FailedUnits()
     {
         // $this->updateColumns();
-        $failed = StudentResults::where('marks', '<', 40)->get();
+ $student = User::where('role_id','=',5)->first();
+           if(Auth::user() == $student) {
+
+            $adm=Auth::user()->adm_no;
+ $failed = StudentResults::where('marks', '<', 40)->where('student_number','=',$adm)->join('timetables','student_results.unit_code','=', 'timetables.unit_code')->get();
         return response()->json($failed);
 
+     }
+       
+else{
+
+   $failed = StudentResults::where('marks', '<', 40)->get();
+        return response()->json($failed);  
+}
 
     }
 

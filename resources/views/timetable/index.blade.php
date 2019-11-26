@@ -45,12 +45,15 @@
                       <th>
                         {{ __('Cohort') }}
                       </th>
-                      @if(Auth::user()->role_id != 5)
+                                            <th>
+                        {{ __('Unit Name') }}
+                      </th>
+                      @if(Auth::user()->role_id == 5)
                                             <th>
                         {{ __('Day') }}
                       </th>
-
-             
+ @endif
+                @if(Auth::user()->role_id =! 5)
                       <th class="text-right">
                         {{ __('Actions') }}
                       </th>
@@ -68,6 +71,8 @@
                           <td>
                          {{ $timetable->session_start }} -   {{ $timetable->session_end }} 
                           </td>
+<td>      {{ $timetable->unit_name }} </td>
+
                            @if(Auth::user()->role_id != 5)
                                                     <td>
                          {{ $timetable->day_of_the_week }} 
