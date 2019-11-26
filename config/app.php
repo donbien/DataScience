@@ -178,7 +178,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
       Khill\Lavacharts\Laravel\LavachartsServiceProvider::class,
-      ConsoleTVs\Charts\ChartsServiceProvider::class
+      ConsoleTVs\Charts\ChartsServiceProvider::class,
+      Laravel\Passport\PassportServiceProvider::class,
 
     ],
 

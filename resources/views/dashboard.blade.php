@@ -18,7 +18,7 @@
             </div>
             <div class="card-footer">
               <div class="stats">
-                 <i class="material-icons">date_range</i> Last 24 Hours
+                    <a href="{{ route('application.index') }}" class="btn btn-sm btn-primary">{{ __('View More') }}</a>
               </div>
             </div>
           </div>
@@ -34,7 +34,7 @@
             </div>
             <div class="card-footer">
               <div class="stats">
-                <i class="material-icons">date_range</i> Last 24 Hours
+                    <a href="{{ route('application.create') }}" class="btn btn-sm btn-primary">{{ __('View More') }}</a>
               </div>
             </div>
           </div>
@@ -50,7 +50,7 @@
             </div>
             <div class="card-footer">
               <div class="stats">
-                <i class="material-icons">local_offer</i> No new update
+                      <a href="{{ route('retakesReports') }}" class="btn btn-sm btn-primary">{{ __('View More') }}</a>
               </div>
             </div>
           </div>
@@ -66,7 +66,7 @@
             </div>
             <div class="card-footer">
               <div class="stats">
-                <i class="material-icons">update</i> Just Updated
+                          <a href="{{ route('retakesReports') }}" class="btn btn-sm btn-primary">{{ __('View More') }}</a>
               </div>
             </div>
           </div>
@@ -152,16 +152,15 @@
      <div class="col-lg-6 col-md-12">
           <div class="card">
             <div class="card-header card-header-warning">
-              <h4 class="card-title">Special Exams</h4>
+              <h4 class="card-title">Retakes</h4>
               <p class="card-category"></p>
             </div>
             <div class="card-body table-responsive">
               <table class="table table-hover">
                 <thead class="text-warning">
                   <th>Student Id</th>
-                  <th>Name</th>
-                  <th>Faculty</th>
-                  <th>Unit</th>
+                  <th>Unit Name</th>
+
                 </thead>
                 <tbody>
                   @foreach($re as $ret)

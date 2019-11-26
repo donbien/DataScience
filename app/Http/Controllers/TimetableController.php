@@ -173,10 +173,27 @@ public function details($unit_code){
 
 public function index()
 {
-    $Timetables = Timetable::latest()->paginate(5);
 
+
+        $student = User::where('role_id','=',5)->first();
+
+    if (Auth::user() == $student) {
+
+            $adm=Auth::user()->adm_no;
+         $model =  StudentResults::with('student')->join('timetables','student_results.unit_code','=', 'timetables.unit_code')->where('student_results.marks', '<', 40)->where('student_results.student_number', '=',   $adm )->get();
+                 $model=      $model->unique('day_of_the_week');
+         return view('timetable.index', ['Timetables' => $model,'student' =>$student]);
+
+     }
+else{
+
+  $Timetables = Timetable::get();
+       $Timetables=   $Timetables->unique('study_year');
+   
     return view('timetable.index',compact('Timetables'))
-    ->with('i', (request()->input('page', 1) - 1) * 5);
+    ->with('i', (request()->input('page', 1) - 1) * 5);  
+}
+    
 }
 
     /**
@@ -235,7 +252,7 @@ public function index()
      * @param  \App\Timetable  $Timetable
      * @return \Illuminate\Http\Response
      */
-    public function edit(Timetable $Timetable)
+    public function edit(Timetable $Timetables)
     {
         return view('timetable.edit',compact('Timetable'));
     }

@@ -52,10 +52,11 @@
                       <th>
                         {{ __('Letter of Reason') }}
                       </th>
-
+@if(Auth::user()->role_id != 5)
                       <th class="text-right">
                         {{ __('Actions') }}
                       </th>
+                        @endif
                     </thead>
                     <tbody>
                       @foreach($applications as $application)
@@ -79,7 +80,7 @@
                           <td>
      <a href="{{ route('download', $application->student_number.'.docx') }}" class="btn btn-sm btn-primary">{{ __('View') }}</a>
                           </td>
-
+ @if(Auth::user()->role_id != 5)
                                                     <td class="td-actions text-right">
                             @if ($application->id != auth()->id())
                               <form action="{{ route('user.destroy', $application) }}" method="post">
@@ -98,6 +99,7 @@
                                 <div class="ripple-container"></div>
                               </a>
                             @endif
+                                @endif
                           </td>
                         </tr>
                       @endforeach

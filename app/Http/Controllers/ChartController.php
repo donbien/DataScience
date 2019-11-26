@@ -19,8 +19,8 @@ class ChartController extends Controller
   )->groupBy('unit_code')->orderBy('unit_code', 'ASC')->get();
 
  $chart = Charts::database($users, 'bar', 'highcharts')
-                  ->title("Monthly new Register Users")
-                  ->elementLabel("Units")
+                  ->title("Retakes")
+                  ->elementLabel("No of Students")
                   ->dimensions(1000, 500)
                   ->responsive(false)
                   ->groupBy('unit_code');
@@ -40,8 +40,8 @@ class ChartController extends Controller
   )->groupBy('unit_code')->orderBy('unit_code', 'ASC')->get();
 
 $repeat = Charts::database($users, 'bar', 'highcharts')
-                  ->title("Monthly new Register Users")
-                  ->elementLabel("Units")
+                  ->title("Repeats")
+                  ->elementLabel("No of Students")
                   ->dimensions(1000, 500)
                   ->responsive(false)
                   ->groupBy('unit_code');

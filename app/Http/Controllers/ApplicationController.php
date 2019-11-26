@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
-  use App\StudentResults;
-  use App\Student;
-  use App\User;
-  use App\Application;
-  use App\Reviews;
-  use Storage;
-  use Auth;
+use App\StudentResults;
+use App\Student;
+use App\User;
+use App\Application;
+use App\Reviews;
+use Storage;
+use Auth;
 
 class ApplicationController extends Controller
 {
@@ -24,46 +24,55 @@ class ApplicationController extends Controller
     {
         $dean = User::where('role_id','=',4)->first();
         $registrar = User::where('role_id','=',7)->first();
+        $student = User::where('role_id','=',5)->first();
 
-if(Auth::user() == $dean ){
+        if(Auth::user() == $dean ){
 
 
- 
-      $model = Application::where('status','=','Course admin')->get(); 
-       return view('applications.index', ['applications' => $model]);
+           
+          $model = Application::where('status','=','Course admin')->get(); 
+          return view('applications.index', ['applications' => $model]);
 
-}
-else if (Auth::user() == $registrar) {
+      }
+      else if (Auth::user() == $registrar) {
 
-       $model = Application::where('status','=','Approved by Dean')->get();
-       return view('applications.index', ['applications' => $model]);
+         $model = Application::where('status','=','Approved by Dean')->get();
+         return view('applications.index', ['applications' => $model]);
 
-}
-else{
+     }
+           else if (Auth::user() == $student) {
+
+            $adm=Auth::user()->adm_no;
+
+         $model = Application::where('student_number','=',$adm)->get();
+         return view('applications.index', ['applications' => $model]);
+
+     }
+     else{
 
       return view('applications.index', ['applications' => $model->paginate(15)]);
-}
+  }
 
 
         // return view('applications.index', ['applications' => $model->paginate(15)]);
-    }
+}
 
 
-    public function studentapplication(){
+public function studentapplication(){
 
 
- $studentapplication = Application::whereStudent_number(Auth::user()->adm_no)->first();
+   $studentapplication = Application::whereStudent_number(Auth::user()->adm_no)->first();
 
-  return response()->json($studentapplication);
+   return response()->json($studentapplication);
 
-    }
+}
 
 
-      public function Dean(Request $request)
-  {      
+public function Dean(Request $request)
+{      
     $courseadmin = Application::where('status','=','Course admin')->get();
-        return response()->json($courseadmin);
-  }
+    return response()->json($courseadmin);
+}
 
 
 
@@ -89,7 +98,7 @@ else{
     public function applicationreview()
     {
 
-  
+      
 
     }
 
@@ -103,28 +112,25 @@ else{
 
 
 
-public function download($file){
-    return response()->download(storage_path('app/documents/'.$file));
- }
+    public function download($file){
+        return response()->download(storage_path('app/documents/'.$file));
+    }
 
 
-
-
-
-     public function store(Request $request)
+    public function store(Request $request)
     {
-       
+     
 
 
-                $extension = $request->file('letter_of_reason')->getClientOriginalExtension();
-                $fileName = Auth::user()->adm_no.'.'.$extension;   
+        $extension = $request->file('letter_of_reason')->getClientOriginalExtension();
+        $fileName = Auth::user()->adm_no.'.'.$extension;   
 
-         $path = $request->file('letter_of_reason')->storeAs('documents', $fileName);
+        $path = $request->file('letter_of_reason')->storeAs('documents', $fileName);
 
 
-    Application::create($request->all());
+        Application::create($request->all());
         return redirect()->route('application.index')
-                        ->with('success','Product created successfully.');
+        ->with('success','Product created successfully.');
     }
 
     /**
@@ -133,16 +139,16 @@ public function download($file){
      * @param  \App\User  $user
      * @return \Illuminate\View\View
      */
-         public function edit(Application $application)
+    public function edit(Application $application)
     {
         return view('applications.edit', compact('application'));
     }
 
 
- public function countApplication(Request $request)
+    public function countApplication(Request $request)
     {
-       
-            $application_stats = Application::count();
+     
+        $application_stats = Application::count();
 
 
  // return view('dashboard', ['application_stats' => $application_stats]);
@@ -152,7 +158,7 @@ public function download($file){
 
 
 
- 
+    
 
     /**
      * Update the specified user in storage
@@ -166,7 +172,7 @@ public function download($file){
         $hasPassword = $request->get('password');
         $user->update(
             $request->merge(['password' => Hash::make($request->get('password'))])
-                ->except([$hasPassword ? '' : 'password']
+            ->except([$hasPassword ? '' : 'password']
         ));
 
         // return redirect()->route('user.index')->withStatus(__('User successfully updated.'));

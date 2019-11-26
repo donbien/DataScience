@@ -47,6 +47,17 @@
                     </div>
                   </div>
                 </div>
+                                <div class="row">
+                  <label class="col-sm-2 col-form-label">{{ __('Year of Study') }}</label>
+                  <div class="col-sm-7">
+                    <div class="form-group{{ $errors->has('year') ? ' has-danger' : '' }}">
+                      <input class="form-control{{ $errors->has('year') ? ' is-invalid' : '' }}" name="study_year" id="input-year" type="text" placeholder="{{ __('Year') }}" value="{{ old('year') }}" required />
+                      @if ($errors->has('year'))
+                        <span id="year-error" class="error text-danger" for="input-year">{{ $errors->first('year') }}</span>
+                      @endif
+                    </div>
+                  </div>
+                </div>
                 <div class="row">
                   <label class="col-sm-2 col-form-label">{{ __('Unit Name') }}</label>
                   <div class="col-sm-7">
