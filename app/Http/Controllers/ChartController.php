@@ -22,7 +22,7 @@ class ChartController extends Controller
                   ->title("Retakes")
                   ->elementLabel("No of Students")
                   ->dimensions(1000, 500)
-                  ->responsive(false)
+                  ->responsive(true)
                   ->groupBy('unit_code');
         return view('chart',compact('chart'));
     }
@@ -43,7 +43,7 @@ $repeat = Charts::database($users, 'bar', 'highcharts')
                   ->title("Repeats")
                   ->elementLabel("No of Students")
                   ->dimensions(1000, 500)
-                  ->responsive(false)
+                  ->responsive(true)
                   ->groupBy('unit_code');
         return view('repeat',compact('repeat'));
     }

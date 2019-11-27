@@ -62,7 +62,7 @@
         </a>
       </li>
       @if(Auth::user()->role_id != 5)
-            <li class="nav-item{{ $activePage == 'application' ? ' active' : '' }}">
+            <li class="nav-item{{ $activePage == 'reports' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('application.index') }}">
           <i class="material-icons">bubble_chart</i>
           <p>{{ __('Reports') }}</p>

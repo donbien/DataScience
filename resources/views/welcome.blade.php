@@ -25,7 +25,7 @@
                     <i class="material-icons">email</i>
                   </span>
                 </div>
-                <input type="text" name="email" class="form-control" placeholder="{{ __('Email...') }}" value="{{ old('email', '') }}" required>
+                <input type="text" name="email" class="form-control" placeholder="{{ __('Email...@strathmore.edu') }}" value="{{ old('email', '') }}" required>
               </div>
           
             <div class="bmd-form-group{{ $errors->has('password') ? ' has-danger' : '' }} mt-3">

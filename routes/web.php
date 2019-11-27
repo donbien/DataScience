@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::post('/userlogin', 'Auth\APIController@login')->name('userlogin');
+Route::post('/studentlogin', 'Auth\APIController@login')->name('userlogin');
 Route::get('/details/{unit_code}', 'TimetableController@details')->name('details');
 Route::get('/retakes/reports', 'ChartController@index')->name('retakesReports');
 Route::get('/repeat/reports', 'ChartController@repeat')->name('repeatsReports');

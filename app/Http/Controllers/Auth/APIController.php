@@ -50,7 +50,7 @@ class APIController extends Controller
     public function login()
     {
         // Check if a user with the specified email exists
-        $user = User::whereAdm_no(request('username'))->first();
+        $user = User::whereEmail(request('email'))->first();
 
         if (! $user) {
 
@@ -71,9 +71,9 @@ class APIController extends Controller
             ], 422);
         }
 
+
         // Format the final response in a desirable format
         return response()->json([
-           
             'user' => $user,
             'status' => 200,
         ]);
@@ -103,9 +103,36 @@ class APIController extends Controller
             ], 422);
         }
 
-     
+        if ($user->active != 1) {
+            return response()->json([
+                'message' => 'Please activate your account',
+                'status' => 422,
+            ], 422);
+        }
 
-        
+
+
+         if ($user->role_id != 5) {
+            return response()->json([
+                'message' => 'You are not an admin',
+                'status' => 422,
+            ], 422);
+        }
+
+
+         
+        $secret = \DB::table('oauth_clients')
+            ->where('id', env('PASSWORD_CLIENT_ID'))
+            ->first()->secret;
+
+        // Send an internal API request to get an access token
+        $data = [
+            'grant_type' => 'password',
+            'client_id' => env('PASSWORD_CLIENT_ID'),
+            'client_secret' => $secret,
+            'username' => request('username'),
+            'password' => request('password'),
+        ];
 
         $request = Request::create('/oauth/token', 'POST', $data);
 

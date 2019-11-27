@@ -48,15 +48,17 @@ class ExamController extends Controller
         {
             $required =$page->getText();
 
-            dd( strpos(strtolower($required), strtolower('BCM 1103')));
+       
          
              if(strpos(strtolower($required), strtolower('BCM 1103'))){
                     return "🥳 Yahooo... I found ".substr_count(strtolower(    $required),strtolower('BCM 1103')).' <i>"'.'BCM 1103'.'"</i>';
                 }else if(strtolower('BCM 1103') == "BCM 1103" || strtolower('BCM 1103') == "BCM 1103"){
-                    return "<b>😍 Love you ... ♥♥♥</b>";
+                    
+           return back();
                 }
                 else{
-                    return "😑 Hufft... I can't find your ".'<i>"'.'BCM 1103'.'"</i>';
+                  
+           return back();
                 }
 
 
@@ -134,4 +136,8 @@ class ExamController extends Controller
 
         // return redirect()->route('user.index')->withStatus(__('User successfully deleted.'));
     }
+
+
+
+    
 }

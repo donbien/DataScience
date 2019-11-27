@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class PendingUnit extends Notification
+class Approvedunit extends Notification
 {
     use Queueable;
 
@@ -48,9 +48,8 @@ class PendingUnit extends Notification
     {
         $url = url('/');
         return (new MailMessage)
-        ->line('Your pending unitis now on session ')
-        ->line('Kindly make the application before the two weeks deadline expires ')
-            ->action('Make Application', url($url))
+        ->line('Your pending unit application is successful')
+   
             ->line('Thank you!');
     }
 

@@ -30,7 +30,7 @@ class ApplicationController extends Controller
 
 
            
-          $model = Application::where('status','=','Course admin')->get(); 
+          $model = Application::where('status','=','Approved by Course Admin')->get(); 
           return view('applications.index', ['applications' => $model]);
 
       }

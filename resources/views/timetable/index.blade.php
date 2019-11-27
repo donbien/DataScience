@@ -53,11 +53,9 @@
                         {{ __('Day') }}
                       </th>
  @endif
-                @if(Auth::user()->role_id =! 5)
-                      <th class="text-right">
-                        {{ __('Actions') }}
-                      </th>
-                        @endif
+              
+                    
+               
                     </thead>
                     <tbody>
                         @foreach(  $Timetables as $timetable)
@@ -73,11 +71,10 @@
                           </td>
 <td>      {{ $timetable->unit_name }} </td>
 
-                           @if(Auth::user()->role_id != 5)
                                                     <td>
                          {{ $timetable->day_of_the_week }} 
                           </td>
-                          @endif
+                        
                           <td>
                              @if(Auth::user()->role_id != 5)
                              <td class="td-actions text-right">

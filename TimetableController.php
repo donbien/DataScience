@@ -52,20 +52,28 @@ class TimetableController extends Controller
               
           $data=$studentresult[0]->student['email_address'];
           $user = User::where('email', $data)->first();
-
-
+//      $user = new User();
+// $user->email = 'gmuchiri@strathmore.edu';   // This is the email you want to send to.
           $user->notify(new PendingUnit($special));
 // 
       }
-  
-           return back(); 
+      return response()->json($studentresult[0]);
  }
 public function details($unit_code){
    $details = StudentResults::with('student')->where('student_results.unit_code','=' ,$unit_code)->join('timetables','student_results.unit_code','=', 'timetables.unit_code')->where('student_results.marks', '<', 40)->get();
    $details=$details->unique('day_of_the_week');
    $details=$details->groupBy('unit_code');
-
-return response( )->json( $details);
+           foreach( $details as $studentresult)
+        {
+              
+          $data=$studentresult[0]->student['email_address'];
+          $user = User::where('email', $data)->first();
+//      $user = new User();
+// $user->email = 'gmuchiri@strathmore.edu';   // This is the email you want to send to.
+          $user->notify(new PendingUnit($details));
+// 
+      }
+      return response()->json( $details );
 }
  public function import(Request $request){
         //validate the xls file

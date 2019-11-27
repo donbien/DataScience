@@ -13,7 +13,7 @@
 
             <div class="card ">
               <div class="card-header card-header-primary">
-                <h4 class="card-title">{{ __('Apply for Exam') }}</h4>
+                <h4 class="card-title">{{ __('Apply for Pending Unit') }}</h4>
                 <p class="card-category"></p>
               </div>
               <div class="card-body ">

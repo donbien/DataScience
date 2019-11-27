@@ -11,7 +11,7 @@ use App\Application;
 use Auth;
 use App\Notifications\DeanNotification;
 use App\Notifications\RegistrarNotification;
-
+use App\Notifications\Approvedunit;
 class ReviewController extends Controller
 {
     public function index(Request $request)
@@ -63,6 +63,20 @@ class ReviewController extends Controller
               $application = Application::findOrFail($request->input('id'));
                $application->status = 'Approved by Academic Registrar';
 
+          $special = Application::join('applications','applications.student_number','=', 'students.student_number')->where('applications.status', '=', 'Approved by Academic Registrar')->get();
+     $special=  $special->unique('day_of_the_week');
+     $special=  $special->groupBy('unit_code');
+        foreach($special as $studentresult)
+        {
+              
+          $data=$studentresult[0]->student['email_address'];
+          $user = User::where('email', $data)->first();
+
+
+          $user->notify(new Approvedunit($special));
+// 
+      }
+               $user->notify(new RegistrarNotification($review));
                 $application->save();
                 $review->save();
                 }
@@ -81,7 +95,7 @@ class ReviewController extends Controller
             }  
 
 
-                return response()->json($review);
+           return back();
             } catch (\Illuminate\Database\QueryException $e) {
                 return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
             }
